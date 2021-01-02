@@ -1,3 +1,4 @@
+import { domCache } from './dom';
 import {
     addCls,
     addAttrs,
@@ -34,9 +35,11 @@ export const createTag = (tagName, content, className = [], attrs = {}) => {
     }
 
     let tagElement = document.createElement(tagName);
+
     tagElement = addCls(tagElement, className);
     tagElement = addAttrs(tagElement, attrs, tags[tagName].attr);
     tagElement = appendChildren(tagElement, content);
+    tagElement = appendChildren(tagElement, content);
 
-    return appendChildren(tagElement, content);
+    return tagElement;
 };
