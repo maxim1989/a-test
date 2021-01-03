@@ -10,7 +10,8 @@ const tags = {
             type: {
                 number: true
             },
-            name: 'string'
+            name: 'string',
+            min: 'string'
         }
     },
     select: {
@@ -26,7 +27,7 @@ const tags = {
     }
 };
 
-export const createTag = (tagName, content, className = [], attrs = {}) => {
+export const createTag = ({ tagName, content, className = [], attrs = {} }) => {
     const tag = tags[tagName];
 
     if (!tag) {

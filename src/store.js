@@ -23,3 +23,8 @@ export const rates = {
 
 rates._response = {};
 rates.watchers = {};
+
+export const state = {
+    selected: null,
+    value: null
+};

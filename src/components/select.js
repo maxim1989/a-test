@@ -1,26 +1,34 @@
 import { createTag } from '../lib/create-tag';
 import { appendChildren } from '../lib/utils';
-import { convertion } from '../store';
+import { convertion, state } from '../store';
 import { getExchangeRates } from '../api/get-exchange-rates';
 
-export const Select = function() {
-    return this.render();
-}
+const handleOnChange = (event) => {
+    console.log('>>> !!! value', event.target.value);
+    state.selected = event.target.value;
+};
+
+export const Select = function(config) {
+    return this.render(config);
+};
 
 Select.counter = 0;
 
 Select.prototype.watcherConversion = function(element, data) {
     element.innerHTML = '';
-    appendChildren(element, data.map(item => createTag(
-        'option',
-        item,
-        [],
-        {
+    state.selected = data[0];
+    appendChildren(element, data.map(item => createTag({
+        tagName: 'option',
+        content: item,
+        attrs: {
             value: item
-        },
-        item
-    )));
+        }
+    })));
 }
+
+Select.prototype.onChange = function(element) {
+    element.addEventListener('change', handleOnChange);
+};
 
 Select.prototype.elementCreated = function(element) {
     Select.counter++;
@@ -31,11 +39,12 @@ Select.prototype.elementCreated = function(element) {
     getExchangeRates();
 };
 
-Select.prototype.render = function() {
-    const element = createTag('select');
+Select.prototype.render = function(config) {
+    const element = createTag(config);
 
     this.element = element;
     this.elementCreated(element);
+    this.onChange(element);
 
     return element;
 };
