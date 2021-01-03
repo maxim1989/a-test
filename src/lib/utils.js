@@ -37,7 +37,7 @@ export const appendChildren = (element, content) => {
     } else if (content && Array.isArray(content)) {
         for (let i = 0; i < content.length; i++) {
             try {
-                element.appendChild(content[i]);
+                element.append(content[i]);
             } catch {
                 throw Error(`"${content[i]}" is not an HTML element`);
             }

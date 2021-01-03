@@ -1,4 +1,3 @@
-import { domCache } from './dom';
 import {
     addCls,
     addAttrs,

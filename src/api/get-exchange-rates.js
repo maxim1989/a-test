@@ -1,6 +1,9 @@
-import { rates } from '../store';
+import {
+    convertion,
+    rates
+} from '../store';
 
-export const getExchangeRates = (convertionProxy) => {
+export const getExchangeRates = () => {
     // const xhr = new XMLHttpRequest();
 
     // xhr.open('GET', 'https://api.exchangeratesapi.io/latest');
@@ -29,5 +32,5 @@ export const getExchangeRates = (convertionProxy) => {
         }
     }
 
-    convertionProxy.data = data;
+    convertion.data = data;
 };

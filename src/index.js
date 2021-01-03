@@ -15,7 +15,7 @@ const Main = () => createTag(
                 name: 'currencyAmout'
             }
         ),
-        Select()
+        new Select()
     ],
     ['wrapper']
 );
