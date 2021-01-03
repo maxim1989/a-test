@@ -23,5 +23,3 @@ export const rates = {
 
 rates._response = {};
 rates.watchers = {};
-
-console.log('>>> ', convertion);
