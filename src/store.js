@@ -26,5 +26,15 @@ rates.watchers = {};
 
 export const state = {
     selected: null,
-    value: null
+    value: null,
+    get result () {
+        return this._result;
+    },
+    set result (result) {
+        this._result = result;
+        Object.keys(this.watchers).forEach(key => this.watchers[key](response));
+    }
 };
+
+state._result = '';
+state.watchers = {};

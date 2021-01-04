@@ -1,3 +1,4 @@
+import { calculate } from '../lib/math';
 import { createTag } from '../lib/create-tag';
 import { appendChildren } from '../lib/utils';
 import { convertion, state } from '../store';
@@ -6,6 +7,10 @@ import { getExchangeRates } from '../api/get-exchange-rates';
 const handleOnChange = (event) => {
     console.log('>>> !!! value', event.target.value);
     state.selected = event.target.value;
+
+    const result = calculate();
+
+    console.log('>>> result from select', result)
 };
 
 export const Select = function(config) {

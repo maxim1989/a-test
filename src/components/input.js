@@ -1,11 +1,13 @@
+import { calculate } from '../lib/math';
 import { createTag } from '../lib/create-tag';
-import { rates, state } from '../store';
+import { state } from '../store';
 
 const handleOnChange = (event) => {
     state.value = event.target.value;
-    console.log('>>> value', event.target.value);
-    console.log('>>> response', rates.response);
-    console.log('>>> state', state);
+    
+    const result = calculate();
+
+    console.log('>>> result from input', result)
 };
 
 export const Input = function (config) {

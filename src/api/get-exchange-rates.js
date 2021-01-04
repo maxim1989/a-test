@@ -4,7 +4,7 @@ import {
 } from '../store';
 
 const calcConvertCombinations = (data) => {
-    const keys = Object.keys(data.rates);
+    const keys = [...Object.keys(data.rates), data.base];
     const store = [];
 
     for (let i = 0; i < keys.length; i++) {
