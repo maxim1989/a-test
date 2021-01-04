@@ -11,38 +11,39 @@ const handleOnChange = (event) => {
     state.result = calculate();
 };
 
-export const Select = function(config) {
+export const Select = function (config) {
     return this.render(config);
 };
 
 Select.counter = 0;
 
-Select.prototype.watcherConversion = function(element, data) {
-    element.innerHTML = '';
-    state.selected = data[0];
-    appendChildren(element, data.map(item => createTag({
-        tagName: 'option',
-        content: item,
-        attrs: {
-            value: item
-        }
-    })));
+Select.prototype.watcherConversion = function (element, data) {
+    if (element.innerHTML === '') {
+        state.selected = data[0];
+        appendChildren(element, data.map(item => createTag({
+            tagName: 'option',
+            content: item,
+            attrs: {
+                value: item
+            }
+        })));
+    }
 }
 
-Select.prototype.onChange = function(element) {
+Select.prototype.onChange = function (element) {
     element.addEventListener('change', handleOnChange);
 };
 
-Select.prototype.elementCreated = function(element) {
+Select.prototype.elementCreated = function (element) {
     Select.counter++;
 
     const elementId = Select.counter;
 
     convertion.watchers = { [`Select-${elementId}`]: (data) => this.watcherConversion(element, data) }
-    getExchangeRates(true);
+    getExchangeRates();
 };
 
-Select.prototype.render = function(config) {
+Select.prototype.render = function (config) {
     const element = createTag(config);
 
     this.element = element;

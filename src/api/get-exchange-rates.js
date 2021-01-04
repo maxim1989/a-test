@@ -18,19 +18,20 @@ const calcConvertCombinations = (data) => {
     convertion.data = store;
 }
 
-export const getExchangeRates = (update) => {
+const ONE_HOUR = 60 * 60 * 1000;
+
+export const getExchangeRates = () => {
     const data = localStorage.getItem('data');
     const last = localStorage.getItem('last');
     const now = Date.now();
-    const minutes = new Date(now - last).getMinutes();
+    const diff = now - last;
 
-    if (data && minutes < 60) {
-        if (update) {
-            const resp = JSON.parse(data);
+    if (data && diff <= ONE_HOUR) {
+        const resp = JSON.parse(data);
 
-            rates.response = resp;
-            calcConvertCombinations(resp);
-        }
+        rates.response = resp;
+        calcConvertCombinations(resp);
+        setTimeout(() => getExchangeRates(), ONE_HOUR - diff);
     } else {
         const xhr = new XMLHttpRequest();
 
@@ -47,10 +48,12 @@ export const getExchangeRates = (update) => {
                 localStorage.setItem('data', xhr.response);
                 localStorage.setItem('last', Date.now());
                 calcConvertCombinations(resp);
+                setTimeout(() => getExchangeRates(), ONE_HOUR );
             }
         };
         xhr.onerror = function () {
             console.error('Request error');
+            alert('Request error, RELOAD page.');
         };
     }
 };
