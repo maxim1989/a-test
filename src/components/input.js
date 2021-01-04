@@ -4,10 +4,7 @@ import { state } from '../store';
 
 const handleOnChange = (event) => {
     state.value = event.target.value;
-    
-    const result = calculate();
-
-    console.log('>>> result from input', result)
+    state.result = calculate();
 };
 
 export const Input = function (config) {

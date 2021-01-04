@@ -18,17 +18,19 @@ const calcConvertCombinations = (data) => {
     convertion.data = store;
 }
 
-export const getExchangeRates = () => {
+export const getExchangeRates = (update) => {
     const data = localStorage.getItem('data');
     const last = localStorage.getItem('last');
     const now = Date.now();
     const minutes = new Date(now - last).getMinutes();
 
     if (data && minutes < 60) {
-        const resp = JSON.parse(data);
+        if (update) {
+            const resp = JSON.parse(data);
 
-        rates.response = resp;
-        calcConvertCombinations(resp);
+            rates.response = resp;
+            calcConvertCombinations(resp);
+        }
     } else {
         const xhr = new XMLHttpRequest();
 

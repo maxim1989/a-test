@@ -7,7 +7,7 @@ export const calculate = () => {
         return `"from=${from}" not found`;
     } else if (to !== rates.response.base && !rates.response.rates[to]) {
         return `"to=${to} not found`;
-    } else if (!state.value) {
+    } else if (!state.value || isNaN(parseFloat(state.value))) {
         return `"value=${state.value}" is not a number`
     }
 

@@ -32,7 +32,7 @@ export const state = {
     },
     set result (result) {
         this._result = result;
-        Object.keys(this.watchers).forEach(key => this.watchers[key](response));
+        Object.keys(this.watchers).forEach(key => this.watchers[key](result));
     }
 };
 

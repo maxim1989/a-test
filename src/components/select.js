@@ -4,13 +4,11 @@ import { appendChildren } from '../lib/utils';
 import { convertion, state } from '../store';
 import { getExchangeRates } from '../api/get-exchange-rates';
 
+import './select.css';
+
 const handleOnChange = (event) => {
-    console.log('>>> !!! value', event.target.value);
     state.selected = event.target.value;
-
-    const result = calculate();
-
-    console.log('>>> result from select', result)
+    state.result = calculate();
 };
 
 export const Select = function(config) {
@@ -41,7 +39,7 @@ Select.prototype.elementCreated = function(element) {
     const elementId = Select.counter;
 
     convertion.watchers = { [`Select-${elementId}`]: (data) => this.watcherConversion(element, data) }
-    getExchangeRates();
+    getExchangeRates(true);
 };
 
 Select.prototype.render = function(config) {
